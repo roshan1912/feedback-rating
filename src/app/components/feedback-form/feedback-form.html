@@ -1,0 +1,120 @@
+<div class="feedback-container">
+  <form [formGroup]="feedbackForm" (ngSubmit)="submitFeedback()">
+    <h2>
+      Submit Feedback — Trip
+      {{ feedbackForm.get('tripId')?.value || 'Select a Trip' }}
+    </h2>
+
+    <!-- Trip Selection -->
+    <div class="form-group">
+      <label for="trip">Select Trip</label>
+
+      <select id="trip" formControlName="tripId">
+        <option value="">Choose a trip</option>
+
+        @for (trip of trips; track trip.tripId) {
+          <option [value]="trip.tripId" [disabled]="isRated(trip.tripId)">
+            {{ trip.tripId }}
+            {{ isRated(trip.tripId) ? '(Already Rated)' : '' }}
+          </option>
+        }
+      </select>
+
+      @if (feedbackForm.get('tripId')?.touched && feedbackForm.get('tripId')?.invalid) {
+        <small class="error">Please select a trip.</small>
+      }
+
+      @if (selectedTrip) {
+        <p class="driver-info">
+          Driver: {{ selectedTrip.driverName }} ({{ selectedTrip.driverId }})
+        </p>
+      }
+    </div>
+
+    <!-- Star Rating -->
+    <div class="form-group">
+      <label>Overall rating *</label>
+
+      <app-star-rating
+        [rating]="feedbackForm.get('rating')?.value ?? 0"
+        (ratingChange)="
+          feedbackForm.get('rating')?.setValue($event); feedbackForm.get('rating')?.markAsTouched()
+        "
+      />
+
+      @if (feedbackForm.get('rating')?.touched && feedbackForm.get('rating')?.invalid) {
+        <small class="error">Please select a rating.</small>
+      }
+    </div>
+
+    <!-- Driver On Time -->
+    <div class="form-group">
+      <label>Q1. Was the driver on time?</label>
+
+      <div class="toggle-group">
+        <button
+          type="button"
+          [class.yes-selected]="feedbackForm.get('onTime')?.value === true"
+          (click)="feedbackForm.get('onTime')?.setValue(true)"
+        >
+          Yes
+        </button>
+
+        <button
+          type="button"
+          [class.no-selected]="feedbackForm.get('onTime')?.value === false"
+          (click)="feedbackForm.get('onTime')?.setValue(false)"
+        >
+          No
+        </button>
+      </div>
+    </div>
+
+    <!-- Cab Cleanliness -->
+    <div class="form-group">
+      <label>Q2. Was the cab clean?</label>
+
+      <div class="toggle-group">
+        <button
+          type="button"
+          [class.yes-selected]="feedbackForm.get('cabClean')?.value === true"
+          (click)="feedbackForm.get('cabClean')?.setValue(true)"
+        >
+          Yes
+        </button>
+
+        <button
+          type="button"
+          [class.no-selected]="feedbackForm.get('cabClean')?.value === false"
+          (click)="feedbackForm.get('cabClean')?.setValue(false)"
+        >
+          No
+        </button>
+      </div>
+    </div>
+
+    <!-- Comments -->
+    <div class="form-group">
+      <label for="comment">Comments (optional)</label>
+
+      <textarea
+        id="comment"
+        formControlName="comment"
+        maxlength="201"
+        rows="2"
+        placeholder="Share your experience..."
+      ></textarea>
+
+      <div class="character-count" [class.error]="commentLength > 200">{{ commentLength }}/200</div>
+
+      @if (feedbackForm.get('comment')?.hasError('maxlength')) {
+        <small class="error"> Maximum 200 characters allowed. </small>
+      }
+    </div>
+
+    <!-- Submit -->
+    <button class="submit-button" type="submit" [disabled]="feedbackForm.invalid">
+      Submit Feedback
+    </button>
+  </form>
+</div>

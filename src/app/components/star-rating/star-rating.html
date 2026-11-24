@@ -1,0 +1,17 @@
+<div class="star-container" (mouseleave)="clearHoveredRating()">
+  @for (star of stars; track star) {
+    <button
+      type="button"
+      class="star"
+      [class.active]="isActive(star)"
+      [attr.aria-label]="'Rate ' + star + ' out of 5 stars'"
+      [attr.aria-pressed]="rating === star"
+      (mouseenter)="setHoveredRating(star)"
+      (focus)="setHoveredRating(star)"
+      (blur)="clearHoveredRating()"
+      (click)="setRating(star)"
+    >
+      ★
+    </button>
+  }
+</div>

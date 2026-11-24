@@ -1,0 +1,22 @@
+.star-container {
+  display: flex;
+  gap: 3px;
+}
+
+.star {
+  border: none;
+  background: none;
+  padding: 0;
+  font-size: 25px;
+  color: #d1d5db;
+  cursor: pointer;
+}
+
+.star.active {
+  color: #f5a623;
+}
+
+.star:focus-visible {
+  outline: 2px solid #326cf4;
+  outline-offset: 2px;
+}

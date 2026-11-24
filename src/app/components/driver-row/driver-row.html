@@ -1,0 +1,38 @@
+<button type="button" class="details-button" (click)="toggleDetails()">
+  {{ expanded ? 'Hide' : 'View' }} Details
+</button>
+
+@if (expanded) {
+  <div class="feedback-details">
+    @for (feedback of driver.feedbacks; track feedback.tripId) {
+      <div class="feedback-item">
+        <p>
+          <strong>Trip:</strong>
+          {{ feedback.tripId }}
+        </p>
+
+        <p>
+          <strong>Rating:</strong>
+          {{ feedback.rating }}/5
+        </p>
+
+        <p>
+          <strong>Driver on time:</strong>
+          {{ feedback.onTime ? 'Yes' : 'No' }}
+        </p>
+
+        <p>
+          <strong>Cab clean:</strong>
+          {{ feedback.cabClean ? 'Yes' : 'No' }}
+        </p>
+
+        <p>
+          <strong>Comment:</strong>
+          {{ feedback.comment || 'No comment provided' }}
+        </p>
+      </div>
+    } @empty {
+      <p>No feedback submitted yet.</p>
+    }
+  </div>
+}

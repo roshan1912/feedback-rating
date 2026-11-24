@@ -1,0 +1,17 @@
+<div class="app-container">
+  <header class="app-header">Trip Feedback — Traveler Submission & Manager Aggregation</header>
+
+  <main class="app-content">
+    <section class="feedback-section">
+      <app-feedback-form
+        [trips]="trips"
+        [ratedTripIds]="ratedTripIds"
+        (feedbackSubmitted)="onFeedbackSubmitted($event)"
+      />
+    </section>
+
+    <section class="dashboard-section">
+      <app-dashboard [trips]="trips" [submissions]="submissions" />
+    </section>
+  </main>
+</div>

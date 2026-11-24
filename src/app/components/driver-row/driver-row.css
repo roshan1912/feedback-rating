@@ -1,0 +1,39 @@
+.details-button {
+  padding: 5px 8px;
+  border: 1px solid #cbd2dc;
+  border-radius: 4px;
+  background: white;
+  font-size: 11px;
+  cursor: pointer;
+}
+
+.details-button:hover {
+  background: #edf0f4;
+}
+
+.feedback-details {
+  position: relative;
+  z-index: 2;
+  min-width: 180px;
+  max-width: 250px;
+  padding: 8px;
+  margin-top: 6px;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.feedback-item {
+  border-bottom: 1px solid #eee;
+  padding: 5px 0;
+  font-size: 11px;
+}
+
+.feedback-item:last-child {
+  border-bottom: none;
+}
+
+.feedback-item p {
+  margin: 5px 0;
+}
