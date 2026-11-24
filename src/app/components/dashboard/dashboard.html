@@ -1,25 +1,17 @@
 <div class="dashboard-container">
-
   <h2>Transport Manager — Driver Aggregates</h2>
 
   <div class="filter-group">
-
     <label for="driverFilter">Filter Drivers:</label>
 
-    <select
-      id="driverFilter"
-      [(ngModel)]="filter"
-    >
+    <select id="driverFilter" [(ngModel)]="filter">
       <option value="all">All Drivers</option>
       <option value="low">Below 3.5 Only</option>
     </select>
-
   </div>
 
   <div class="table-wrapper">
-
     <table>
-
       <thead>
         <tr>
           <th>Driver</th>
@@ -31,11 +23,8 @@
       </thead>
 
       <tbody>
-
         @for (driver of filteredDrivers; track driver.driverId) {
-
           <tr>
-
             <td>
               {{ driver.driverName }}
               ({{ driver.driverId }})
@@ -44,21 +33,15 @@
             <td>{{ driver.tripCount }}</td>
 
             <td>
-
               @if (driver.averageRating !== null) {
-
-                {{ driver.averageRating | number:'1.2-2' }}
+                {{ driver.averageRating | number: '1.2-2' }}
 
                 @if (driver.averageRating < 3.5) {
                   <span class="low-badge">Low</span>
                 }
-
               } @else {
-
                 —
-
               }
-
             </td>
 
             <td>—</td>
@@ -66,30 +49,22 @@
             <td>
               <app-driver-row [driver]="driver" />
             </td>
-
           </tr>
-
         } @empty {
-
           <tr>
             <td colspan="5">No drivers found.</td>
           </tr>
-
         }
-
       </tbody>
-
     </table>
-
   </div>
 
   <div class="aggregate-info">
-
     <p>
       All trips aggregate:
       <strong>
         @if (submissions.length > 0) {
-          {{ overallAverage | number:'1.2-2' }} ★
+          {{ overallAverage | number: '1.2-2' }} ★
         } @else {
           —
         }
@@ -97,19 +72,14 @@
 
       ({{ submissions.length }} responses)
     </p>
-
   </div>
 
   <div class="chart-container">
-
     <h3>Avg rating per driver</h3>
 
     <div class="bar-chart">
-
       @for (driver of driverSummaries; track driver.driverId) {
-
         <div class="bar-item">
-
           <div
             class="bar"
             [class.low-bar]="driver.averageRating !== null && driver.averageRating < 3.5"
@@ -118,13 +88,8 @@
           ></div>
 
           <small>{{ driver.driverName }}</small>
-
         </div>
-
       }
-
     </div>
-
   </div>
-
 </div>
